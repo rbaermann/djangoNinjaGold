@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset='UTF-8'>
+        <meta name='ninjaGold' content='This is an application where you wager your gold into different areas to increase or decrease your gold.'>
+        <title>Ninja Gold Score</title>
+        {% load static %}
+        <link rel='stylesheet' href='{% static "app1/css/style.css" %}'>
+    </head>
+    <body>
+        <div class='container'>
+            <form action='/process_money' method='POST'>
+                {% csrf_token %}
+                {% if gold < 250 %}
+                    <h1 class='grey' style='color: red;'>YOU HAVE LOST</h1>
+                    <h3>YOU HAVE FINISHED WITH: {{ gold }} GOLD</h3>
+                    <input type='hidden' name='reset' value='resetbtn'>
+                    <input class='reset' type='submit' value='RESET'>
+                {% endif %}
+                {% if gold >= 250 %}
+                    <h1 class='grey' style='color: gold;'>YOU HAVE WON</h1>
+                    <h3>YOU HAVE FINISHED WITH: {{ gold }} GOLD</h3>
+                    <input type='hidden' name='reset' value='resetbtn'>
+                    <input class='reset' type='submit' value='RESET'>
+                {% endif %}
+            </form>
+        </div>
+    </body>
+</html>
